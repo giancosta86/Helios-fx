@@ -2,7 +2,7 @@
   ===========================================================================
   Helios - FX
   ===========================================================================
-  Copyright (C) 2013-2015 Gianluca Costa
+  Copyright (C) 2013-2016 Gianluca Costa
   ===========================================================================
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -28,33 +28,42 @@ buildscript {
     }
 
     dependencies {
-        classpath 'info.gianlucacosta.moonlicense:moonlicense-gradle:3.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.1'
-        classpath 'info.gianlucacosta.aurora:aurora:2.0'
+        classpath 'info.gianlucacosta.moonlicense:moonlicense-gradle:4.3'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+        classpath 'info.gianlucacosta.aurora:aurora:7.0'
     }
 }
 
 
-apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'maven'
+apply plugin: 'osgi'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'info.gianlucacosta.moonlicense'
 apply plugin: 'info.gianlucacosta.aurora'
+
 
 
 group = 'info.gianlucacosta.helios'
 archivesBaseName = 'helios-fx'
-version = '1.7'
+version = '5.0'
 
-description = 'Library of JavaFX-related utilities'
+description = 'Library of ScalaFX utilities'
 
 
 
 dependencies {
-    compile 'info.gianlucacosta.helios:helios-core:1.7'
+    generatedCompile 'org.scala-lang:scala-library:2.11.8'
+
+    compile 'org.scala-lang:scala-library:2.11.8'
+    compile 'org.scalafx:scalafx_2.11:8.0.92-R10'
+
+    compile 'info.gianlucacosta.helios:helios-core:5.0'
 }
 
 
 
 aurora {
-    docTask = 'javadoc'
     gitHubUser = 'giancosta86'
 
     author {
@@ -64,11 +73,14 @@ aurora {
     }
 
     bintray {
-        user = project.bintrayUser
-        key = project.bintrayKey
         repo = 'Hephaestus'
         licenses = ['Apache-2.0']
-        labels = ['utilities', 'JavaFX', 'library', 'Java']
+        labels = [
+                'utilities',
+                'library',
+                'Scala',
+                'ScalaFX'
+        ]
     }
 }
 

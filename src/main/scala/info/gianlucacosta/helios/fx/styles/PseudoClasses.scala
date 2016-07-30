@@ -18,5 +18,10 @@
   ===========================================================================
 */
 
-rootProject.name = 'Helios-fx'
+package info.gianlucacosta.helios.fx.styles
 
+import scalafx.css.PseudoClass
+
+object PseudoClasses {
+  val Selected = PseudoClass("selected")
+}
