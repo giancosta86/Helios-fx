@@ -36,23 +36,30 @@ case object InputDialogs {
     * @return Some(true) if the user chooses "Yes", Some(false) if the user chooses "No", None otherwise
     */
   def askYesNoCancel(message: String, header: String = ""): Option[Boolean] = {
-    val yesButton = new ButtonType("Yes")
-    val noButton = new ButtonType("No")
-    val cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CancelClose)
+    val yesButton =
+      new ButtonType("Yes")
 
-    val alert = new Alert(Alert.AlertType.Confirmation) {
-      headerText = header
+    val noButton =
+      new ButtonType("No")
 
-      contentText = message
+    val cancelButton =
+      new ButtonType("Cancel", ButtonBar.ButtonData.CancelClose)
 
-      buttonTypes = List(
-        yesButton,
-        noButton,
-        cancelButton
-      )
-    }
+    val alert =
+      new Alert(Alert.AlertType.Confirmation) {
+        headerText = header
 
-    val inputResult = alert.showAndWait()
+        contentText = message
+
+        buttonTypes = List(
+          yesButton,
+          noButton,
+          cancelButton
+        )
+      }
+
+    val inputResult =
+      alert.showAndWait()
 
     inputResult match {
       case Some(`yesButton`) =>
@@ -81,7 +88,8 @@ case object InputDialogs {
       resizable = true
     }
 
-    val inputResult = inputDialog.showAndWait()
+    val inputResult =
+      inputDialog.showAndWait()
 
     inputResult
       .map(_.trim)
@@ -109,11 +117,12 @@ case object InputDialogs {
                     formatter: Double => String = Numbers.smartString
                   ): Option[Double] = {
     while (true) {
-      val inputString = askForString(
-        message,
-        formatter(initialValue),
-        header
-      )
+      val inputString =
+        askForString(
+          message,
+          formatter(initialValue),
+          header
+        )
 
       if (inputString.isEmpty) {
         return None
@@ -121,14 +130,14 @@ case object InputDialogs {
 
 
       try {
-        val value = inputString.get.toDouble
+        val value =
+          inputString.get.toDouble
 
         if (value < minValue || value > maxValue) {
           Alerts.showWarning(
             s"Please, enter a number in the range [${formatter(minValue)}; ${formatter(maxValue)}]", header)
-        }
-
-        return Some(value)
+        } else
+          return Some(value)
 
       } catch {
         case _: NumberFormatException =>
@@ -159,13 +168,15 @@ case object InputDialogs {
                   header: String = ""
                 ): Option[Long] = {
     while (true) {
-      val inputDoubleResult = askForDouble(message, initialValue, minValue, maxValue, header)
+      val inputDoubleResult =
+        askForDouble(message, initialValue, minValue, maxValue, header)
 
       if (inputDoubleResult.isEmpty) {
         return None
       }
 
-      val longValueOption = Numbers.asLong(inputDoubleResult.get)
+      val longValueOption =
+        Numbers.asLong(inputDoubleResult.get)
 
       longValueOption match {
         case Some(longValue) =>
@@ -193,11 +204,12 @@ case object InputDialogs {
   def askForItem[T](message: String, items: Seq[T], initialItem: Option[T] = None, header: String = ""): Option[T] = {
     require(items.nonEmpty)
 
-    val choiceDialog = new ChoiceDialog[T](initialItem.getOrElse(items.head), items) {
-      headerText = header
+    val choiceDialog =
+      new ChoiceDialog[T](initialItem.getOrElse(items.head), items) {
+        headerText = header
 
-      contentText = message
-    }
+        contentText = message
+      }
 
     choiceDialog.showAndWait()
   }
