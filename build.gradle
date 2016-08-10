@@ -46,7 +46,7 @@ apply plugin: 'info.gianlucacosta.aurora'
 
 group = 'info.gianlucacosta.helios'
 archivesBaseName = 'helios-fx'
-version = '5.1'
+version = '5.2'
 
 description = 'Library of ScalaFX utilities'
 
@@ -58,7 +58,7 @@ dependencies {
     compile 'org.scala-lang:scala-library:2.11.8'
     compile 'org.scalafx:scalafx_2.11:8.0.92-R10'
 
-    compile 'info.gianlucacosta.helios:helios-core:5.0'
+    compile 'info.gianlucacosta.helios:helios-core:5.1'
 }
 
 

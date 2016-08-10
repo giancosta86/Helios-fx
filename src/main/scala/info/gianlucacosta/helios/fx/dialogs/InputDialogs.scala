@@ -22,7 +22,13 @@ package info.gianlucacosta.helios.fx.dialogs
 
 import info.gianlucacosta.helios.mathutils.Numbers
 
+import scalafx.Includes._
+import scalafx.event.ActionEvent
+import scalafx.geometry.{Dimension2D, Insets}
+import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control._
+import scalafx.scene.layout.VBox
+
 
 /**
   * Shows common input dialogs
@@ -93,6 +99,117 @@ case object InputDialogs {
 
     inputResult
       .map(_.trim)
+  }
+
+
+  /**
+    * Asks for a string by showing a dedicated dialog with a TextArea
+    * and then trimming the user's input.
+    *
+    * If a validator is provided, it must be a function receiving the trimmed text and returning
+    * a boolean: <i>true</i> if the dialog can be closed when the user clicks OK,
+    * <i>false</i> otherwise.
+    *
+    * @param message
+    * @param initialValue
+    * @param header
+    * @param validator         The validator function - returning <i>true</i>
+    *                          if the dialog can be closed when the user clicks OK.
+    *                          Error notifications to the user should occur before returning false
+    * @param textAreaStyle     The JavaFX CSS style for the text area.
+    *                          If it is an empty string, no style will be applied
+    * @param textAreaDimension The preferred size for the text area
+    * @return The trimmed version of the user's input, or None if the user canceled the dialog
+    */
+  def askForText(
+                  message: String,
+                  initialValue: String = "",
+                  header: String = "",
+                  validator: (String => Boolean) = (text) => true,
+                  textAreaStyle: String = "",
+                  textAreaDimension: Dimension2D = new Dimension2D(700, 500)
+                ): Option[String] = {
+
+    val dialog =
+      new Alert(AlertType.Confirmation) {
+        headerText = header
+        resizable = true
+      }
+
+
+    val messageLabel =
+      new Label {
+        text = message
+
+        padding = Insets(0, 0, 8, 0)
+      }
+
+
+    val textArea =
+      new TextArea {
+        text =
+          initialValue
+
+        prefWidth =
+          textAreaDimension.width
+
+        prefHeight =
+          textAreaDimension.height
+
+        if (textAreaStyle.nonEmpty) {
+          style =
+            textAreaStyle
+        }
+      }
+
+
+    dialog.dialogPane().content =
+      new VBox {
+        children.setAll(
+          messageLabel,
+          textArea
+        )
+      }
+
+
+    dialog.dialogPane().buttonTypes = List(
+      ButtonType.OK,
+      ButtonType.Cancel
+    )
+
+
+    val okButton: Button =
+      dialog
+        .dialogPane()
+        .lookupButton(ButtonType.OK)
+        .asInstanceOf[javafx.scene.control.Button]
+
+
+    okButton.filterEvent(ActionEvent.Action) {
+      event: ActionEvent => {
+        val canClose =
+          validator(textArea.text().trim)
+
+        if (!canClose) {
+          event.consume()
+        }
+      }
+    }
+
+    Alerts.fix(dialog)
+
+
+    val dialogResult =
+      dialog.showAndWait()
+
+
+    dialogResult match {
+      case Some(ButtonType.OK) =>
+        Some(textArea.text().trim)
+
+      case _ =>
+        None
+    }
   }
 
 
