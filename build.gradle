@@ -46,7 +46,7 @@ apply plugin: 'info.gianlucacosta.aurora'
 
 group = 'info.gianlucacosta.helios'
 archivesBaseName = 'helios-fx'
-version = '5.2'
+version = '6.0'
 
 description = 'Library of ScalaFX utilities'
 

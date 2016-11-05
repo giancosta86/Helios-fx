@@ -51,7 +51,15 @@ class FileChooserExtensions private(fileChooser: FileChooser) {
   def smartOpen(window: Window): File = {
     setupInitialDirectory()
 
-    fileChooser.showOpenDialog(window)
+    val chosenFile = fileChooser.showOpenDialog(window)
+    if (chosenFile == null) {
+      return null
+    }
+
+    FileChooserExtensions.latestChosenFiles +=
+      (System.identityHashCode(fileChooser) -> chosenFile)
+
+    chosenFile
   }
 
 
@@ -74,9 +82,11 @@ class FileChooserExtensions private(fileChooser: FileChooser) {
       return null
     }
 
-    FileChooserExtensions.latestChosenFiles += (System.identityHashCode(fileChooser) -> chosenFile)
+    FileChooserExtensions.latestChosenFiles +=
+      (System.identityHashCode(fileChooser) -> chosenFile)
 
-    val fileHasExtension = chosenFile.getName.split('.').length > 1
+    val fileHasExtension =
+      chosenFile.getName.split('.').length > 1
 
     if (!fileHasExtension) {
       val selectedFilter = fileChooser.getSelectedExtensionFilter
