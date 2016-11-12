@@ -46,16 +46,14 @@ class AboutBox(appInfo: AppInfo) extends Alert(AlertType.None) {
     loader.getController[AboutBoxController]
 
 
-  Platform.runLater {
-    controller.setup(appInfo)
+  controller.setup(appInfo)
 
-    dialogPane().setContent(root)
+  dialogPane().setContent(root)
 
 
-    buttonTypes = Seq(
-      new ButtonType("OK", ButtonBar.ButtonData.OKDone)
-    )
+  buttonTypes = Seq(
+    new ButtonType("OK", ButtonBar.ButtonData.OKDone)
+  )
 
-    title = s"About ${appInfo.name}..."
-  }
+  title = s"About ${appInfo.name}..."
 }

@@ -24,6 +24,7 @@ import javafx.fxml.FXML
 
 import info.gianlucacosta.helios.apps.AppInfo
 import info.gianlucacosta.helios.desktop.DesktopUtils
+import scalafx.Includes._
 
 /**
   * Automatically instantiated and configured by AboutBox
@@ -32,28 +33,33 @@ class AboutBoxController {
   private var appInfo: AppInfo = _
 
   def setup(appInfo: AppInfo) {
-    this.appInfo = appInfo
+    this.appInfo =
+      appInfo
 
-    nameLabel.setText(appInfo.name)
+    nameLabel.text =
+      appInfo.name
 
-    versionLabel.setText(s"Version ${appInfo.version}")
+    versionLabel.text =
+      s"Version ${appInfo.version}"
 
-    copyrightLabel.setText(s"Copyright © ${appInfo.copyrightYears} ${appInfo.copyrightHolder}.")
+    copyrightLabel.text =
+      s"Copyright © ${appInfo.copyrightYears} ${appInfo.copyrightHolder}."
 
-    licenseLabel.setText(
-      "This software is released under the following license:\n"
-        + "\n"
-        + s"\t${appInfo.license}"
-    )
+    licenseLabel.text =
+      "This software is released under the following license:\n" +
+        "\n" +
+        s"\t${appInfo.license}"
 
-    additionalInfoLabel.setText(
+
+    additionalInfoLabel.text =
       "For further information, please refer to the LICENSE and README files."
-    )
+
 
     mainIconImageView.setImage(appInfo.getMainIconImage(128))
 
     if (appInfo.facebookPage == null || appInfo.facebookPage.isEmpty) {
-      showFacebookPageButton.setVisible(false)
+      showFacebookPageButton.visible =
+        false
     }
   }
 
