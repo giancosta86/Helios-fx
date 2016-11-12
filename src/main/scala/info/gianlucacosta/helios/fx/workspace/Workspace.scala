@@ -21,14 +21,16 @@
 package info.gianlucacosta.helios.fx.workspace
 
 import java.io.File
-import javafx.beans.property.{SimpleBooleanProperty, SimpleObjectProperty}
+import javafx.beans.property._
 import javafx.event.EventHandler
 import javafx.stage.{Stage, WindowEvent}
 
-import info.gianlucacosta.helios.fx.dialogs.FileChooserExtensions._
+import info.gianlucacosta.helios.fx.Includes._
 import info.gianlucacosta.helios.fx.dialogs.{Alerts, InputDialogs}
 
 import scalafx.stage.FileChooser
+import scalafx.Includes._
+
 
 /**
   * Single-document-interface (SDI) workspace.
@@ -36,7 +38,7 @@ import scalafx.stage.FileChooser
   * Main features:
   * <ul>
   * <li>
-  * <i>documentFile</i> and <i>modified</i> Java & JavaFX properties, to handle the current
+  * <i>documentFile</i> and <i>modified</i> ScalaFX properties, to handle the current
   * document's status
   * </li>
   *
@@ -62,8 +64,26 @@ import scalafx.stage.FileChooser
   * @param documentFileChooser The file chooser to open/save documents
   */
 abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
-  val documentFileProperty = new SimpleObjectProperty[Option[File]](None)
-  val modifiedProperty = new SimpleBooleanProperty(false)
+  private val _documentFileOption =
+    new SimpleObjectProperty[Option[File]](None)
+
+  def documentFileOption: ReadOnlyObjectProperty[Option[File]] =
+    _documentFileOption
+
+  private def documentFileOption_=(newValue: Option[File]) =
+    _documentFileOption() =
+      newValue
+
+
+  private val _modified =
+    new SimpleBooleanProperty(false)
+
+  def modified: ReadOnlyBooleanProperty =
+    _modified
+
+  private def modified_=(newValue: Boolean) =
+    _modified() =
+      newValue
 
 
   /**
@@ -81,28 +101,12 @@ abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
   }
 
 
-  def documentFile: Option[File] = {
-    documentFileProperty.get
-  }
-
-  private def documentFile_=(value: Option[File]) {
-    documentFileProperty.set(value)
-  }
-
-
-  def modified: Boolean =
-    modifiedProperty.get
-
-  private def modified_=(value: Boolean) {
-    modifiedProperty.set(value)
-  }
-
-
   /**
     * Sets the workspace's "modified" flag to true
     */
   def setModified(): Unit = {
-    modified = true
+    modified =
+      true
   }
 
 
@@ -116,8 +120,11 @@ abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
         return false
       }
 
-      documentFile = None
-      modified = false
+      documentFileOption =
+        None
+
+      modified =
+        false
 
       true
     } catch {
@@ -141,7 +148,9 @@ abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
         return false
       }
 
-      val selectedFile = documentFileChooser.smartOpen(stage)
+      val selectedFile =
+        documentFileChooser.smartOpen(stage)
+
       if (selectedFile == null) {
         return false
       }
@@ -151,8 +160,11 @@ abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
         return false
       }
 
-      documentFile = Some(selectedFile)
-      modified = false
+      documentFileOption =
+        Some(selectedFile)
+
+      modified =
+        false
 
       true
     } catch {
@@ -174,12 +186,14 @@ abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
 
   def saveDocument(): Boolean = {
     try {
-      documentFile
+      documentFileOption()
         .map(file => {
-          val saveResult = doSave(file)
+          val saveResult =
+            doSave(file)
 
           if (saveResult) {
-            modified = false
+            modified =
+              false
           }
 
           saveResult
@@ -197,7 +211,9 @@ abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
 
   def saveAsDocument(): Boolean = {
     try {
-      val selectedFile = documentFileChooser.smartSave(stage)
+      val selectedFile =
+        documentFileChooser.smartSave(stage)
+
       if (selectedFile == null) {
         return false
       }
@@ -206,8 +222,12 @@ abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
         return false
       }
 
-      documentFile = Some(selectedFile)
-      modified = false
+      documentFileOption =
+        Some(selectedFile)
+
+      modified =
+        false
+
       true
     }
     catch {
@@ -242,14 +262,14 @@ abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
 
 
   private def canLeaveDocument: Boolean = {
-    if (!modified) {
+    if (!modified()) {
       return true
     }
 
     InputDialogs.askYesNoCancel("Do you wish to save your work?") match {
       case Some(true) =>
         saveDocument()
-        !modified
+        !modified()
       case Some(false) =>
         true
       case _ =>
