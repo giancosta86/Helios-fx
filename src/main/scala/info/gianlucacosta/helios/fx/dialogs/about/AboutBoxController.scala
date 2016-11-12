@@ -24,6 +24,7 @@ import javafx.fxml.FXML
 
 import info.gianlucacosta.helios.apps.AppInfo
 import info.gianlucacosta.helios.desktop.DesktopUtils
+
 import scalafx.Includes._
 
 /**

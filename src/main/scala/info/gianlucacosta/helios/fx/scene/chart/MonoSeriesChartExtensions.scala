@@ -21,23 +21,25 @@
 package info.gianlucacosta.helios.fx.scene.chart
 
 import java.io.PrintWriter
-import scalafx.scene.chart.{Chart, PieChart, XYChart}
 
 import scala.language.implicitConversions
 import scalafx.Includes._
+import scalafx.scene.chart.{Chart, PieChart, XYChart}
 
 
 /**
   * Extensions for charts having just one series
+  *
   * @param chart
   */
 class MonoSeriesChartExtensions private[fx](chart: Chart) {
   /**
     * Returns true if the chart can be exported as comma-separated values (CSV)
+    *
     * @return
     */
   def canExportAsCSV: Boolean =
-    chart.isInstanceOf[XYChart[_, _]] || chart.isInstanceOf[PieChart]
+  chart.isInstanceOf[XYChart[_, _]] || chart.isInstanceOf[PieChart]
 
 
   /**

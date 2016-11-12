@@ -72,7 +72,7 @@ case object Alerts {
     * @param header
     */
   def showInfo(message: String, header: String = ""): Unit =
-    showAlert(AlertType.Information, message, header)
+  showAlert(AlertType.Information, message, header)
 
 
   /**
@@ -82,7 +82,7 @@ case object Alerts {
     * @param header
     */
   def showWarning(message: String, header: String = ""): Unit =
-    showAlert(AlertType.Warning, message, header)
+  showAlert(AlertType.Warning, message, header)
 
 
   /**
@@ -92,7 +92,7 @@ case object Alerts {
     * @param header
     */
   def showError(message: String, header: String = ""): Unit =
-    showAlert(AlertType.Error, message, header)
+  showAlert(AlertType.Error, message, header)
 
 
   /**

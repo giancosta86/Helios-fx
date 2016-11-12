@@ -82,5 +82,5 @@ class Point2DExtensions private[fx](point: Point2D) extends Point2D(point.x, poi
     * @return
     */
   def clip(dimension: Dimension2D): Point2D =
-    clip(dimension.width, dimension.height)
+  clip(dimension.width, dimension.height)
 }

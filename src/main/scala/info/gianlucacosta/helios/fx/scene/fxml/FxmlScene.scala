@@ -34,30 +34,29 @@ import scalafx.scene.Scene
   * More precisely, given a controller class -for example, <b>org.example.MyController</b>:
   *
   * <ul>
-  *   <li>
-  *     The FXML file is expected to be the resource <b>org.example.MyScene.fxml</b>
-  *   </li>
+  * <li>
+  * The FXML file is expected to be the resource <b>org.example.MyScene.fxml</b>
+  * </li>
   *
-  *   <li>
-  *     Optionally, there can be a CSS file, loaded to style the scene. In the example, it should be the resource <b>org.example.MyScene.css</b>
-  *   </li>
+  * <li>
+  * Optionally, there can be a CSS file, loaded to style the scene. In the example, it should be the resource <b>org.example.MyScene.css</b>
+  * </li>
   * </ul>
   *
   * Parameters can be passed to the controller by implementing the preInitialize() method.
   *
-  *
   * @param controllerClass The underlying controller class, to be instantiated for the scene. It <b>must</b>:
   *                        <ul>
-  *                          <li>
-  *                            Have a class name ending with <i>Controller</i>
-  *                          </li>
+  *                        <li>
+  *                        Have a class name ending with <i>Controller</i>
+  *                        </li>
   *
-  *                          <li>
-  *                            Expose a no-arg constructor
-  *                          </li>
+  *                        <li>
+  *                        Expose a no-arg constructor
+  *                        </li>
   *                        </ul>
   * @tparam TController The type of the controller
-  * @tparam TRootNode The type of the root node in the FXML document. It usually belongs to the javafx.** package tree
+  * @tparam TRootNode   The type of the root node in the FXML document. It usually belongs to the javafx.** package tree
   */
 class FxmlScene[TController, TRootNode <: Parent](controllerClass: Class[TController]) extends Scene {
   private val sceneSimpleName: String = {
@@ -80,7 +79,7 @@ class FxmlScene[TController, TRootNode <: Parent](controllerClass: Class[TContro
     * The underlying controller instance
     */
   protected val controller: TController =
-    controllerClass.newInstance()
+  controllerClass.newInstance()
 
 
   preInitialize()

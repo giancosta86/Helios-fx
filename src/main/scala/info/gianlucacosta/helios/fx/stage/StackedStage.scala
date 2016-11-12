@@ -26,13 +26,14 @@ import scalafx.stage.{Stage, WindowEvent}
 /**
   * Stage that:
   * <ul>
-  *   <li>when shown, hides its previous window (as defined in the dedicated method)</li>
-  *   <li>when hidden, shows its previous window back</li>
+  * <li>when shown, hides its previous window (as defined in the dedicated method)</li>
+  * <li>when hidden, shows its previous window back</li>
   * </ul>
   */
 trait StackedStage extends Stage {
   /**
     * The previous stage
+    *
     * @return
     */
   def previousStage: javafx.stage.Stage

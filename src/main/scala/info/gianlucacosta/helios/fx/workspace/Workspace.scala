@@ -28,8 +28,8 @@ import javafx.stage.{Stage, WindowEvent}
 import info.gianlucacosta.helios.fx.Includes._
 import info.gianlucacosta.helios.fx.dialogs.{Alerts, InputDialogs}
 
-import scalafx.stage.FileChooser
 import scalafx.Includes._
+import scalafx.stage.FileChooser
 
 
 /**

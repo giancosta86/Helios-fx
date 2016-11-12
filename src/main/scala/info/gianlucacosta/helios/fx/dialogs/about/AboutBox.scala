@@ -24,7 +24,6 @@ import javafx.fxml.FXMLLoader
 
 import info.gianlucacosta.helios.apps.AppInfo
 
-import scalafx.application.Platform
 import scalafx.scene.control.Alert.AlertType
 import scalafx.scene.control.{Alert, ButtonBar, ButtonType}
 

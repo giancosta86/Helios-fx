@@ -26,13 +26,12 @@ import info.gianlucacosta.helios.fx.scene.chart.MonoSeriesChartExtensions
 import info.gianlucacosta.helios.fx.stage.{FileChooserExtensions, StageExtensions}
 
 import scala.language.implicitConversions
+import scalafx.Includes._
 import scalafx.geometry.{Bounds, Point2D}
 import scalafx.scene.Node
 import scalafx.scene.chart.Chart
 import scalafx.scene.input.MouseEvent
 import scalafx.stage.{FileChooser, Stage}
-
-import scalafx.Includes._
 
 /**
   * Central point containing all the extensions provided by the library

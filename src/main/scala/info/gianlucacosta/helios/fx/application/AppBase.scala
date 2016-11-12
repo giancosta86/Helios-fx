@@ -24,7 +24,6 @@ import javafx.application.Application
 import javafx.stage.Stage
 
 import info.gianlucacosta.helios.apps.AppInfo
-import scalafx.Includes._
 import info.gianlucacosta.helios.fx.Includes._
 
 
