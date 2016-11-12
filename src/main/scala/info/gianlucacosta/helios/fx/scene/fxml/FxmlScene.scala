@@ -18,7 +18,7 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.stage.fxml
+package info.gianlucacosta.helios.fx.scene.fxml
 
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
@@ -43,14 +43,11 @@ import scalafx.scene.Scene
   *   </li>
   * </ul>
   *
-  * @see FxmlController
+  * Parameters can be passed to the controller by implementing the preInitialize() method.
+  *
   *
   * @param controllerClass The underlying controller class, to be instantiated for the scene. It <b>must</b>:
   *                        <ul>
-  *                          <li>
-  *                            Implement <b>FxmlController</b>
-  *                          </li>
-  *
   *                          <li>
   *                            Have a class name ending with <i>Controller</i>
   *                          </li>
@@ -59,10 +56,10 @@ import scalafx.scene.Scene
   *                            Expose a no-arg constructor
   *                          </li>
   *                        </ul>
-  * @tparam TController The controller type parameter
+  * @tparam TController The type of the controller
   * @tparam TRootNode The type of the root node in the FXML document. It usually belongs to the javafx.** package tree
   */
-class FxmlScene[TController <: FxmlController, TRootNode <: Parent](controllerClass: Class[TController]) extends Scene {
+class FxmlScene[TController, TRootNode <: Parent](controllerClass: Class[TController]) extends Scene {
   private val sceneSimpleName: String = {
     val controllerSimpleName =
       controllerClass.getSimpleName
@@ -82,8 +79,19 @@ class FxmlScene[TController <: FxmlController, TRootNode <: Parent](controllerCl
   /**
     * The underlying controller instance
     */
-  val controller: TController =
+  protected val controller: TController =
     controllerClass.newInstance()
+
+
+  preInitialize()
+
+
+  /**
+    * Method called <em>before</em> the FXML is loaded and the controller initialized by the FXML loader.
+    *
+    * It is especially useful to inject parameters into the controller. By default, the method does nothing.
+    */
+  protected def preInitialize() {}
 
 
   root =
@@ -113,10 +121,6 @@ class FxmlScene[TController <: FxmlController, TRootNode <: Parent](controllerCl
 
     loader.load().asInstanceOf[TRootNode]
   }
-
-
-  controller.scene =
-    this
 
 
   tryToLoadCss()
