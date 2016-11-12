@@ -18,7 +18,7 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.dialogs
+package info.gianlucacosta.helios.fx.stage
 
 import java.io.File
 import javafx.stage.Window
@@ -29,10 +29,8 @@ import scalafx.stage.FileChooser
 
 
 object FileChooserExtensions {
-  private var latestChosenFiles = Map[Int, File]()
-
-  implicit def convertFileChooser(fileChooser: FileChooser): FileChooserExtensions =
-    new FileChooserExtensions(fileChooser)
+  private var latestChosenFiles =
+    Map[Int, File]()
 }
 
 
@@ -41,7 +39,7 @@ object FileChooserExtensions {
   *
   * @param fileChooser
   */
-class FileChooserExtensions private(fileChooser: FileChooser) {
+class FileChooserExtensions private[fx](fileChooser: FileChooser) {
   /**
     * Shows the <i>Open</i> dialog in the directory of its latest opened/saved file
     *

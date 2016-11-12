@@ -30,7 +30,7 @@ buildscript {
     dependencies {
         classpath 'info.gianlucacosta.moonlicense:moonlicense-gradle:4.3'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
-        classpath 'info.gianlucacosta.aurora:aurora:7.0'
+        classpath 'info.gianlucacosta.aurora:aurora:8.0'
     }
 }
 
@@ -46,7 +46,7 @@ apply plugin: 'info.gianlucacosta.aurora'
 
 group = 'info.gianlucacosta.helios'
 archivesBaseName = 'helios-fx'
-version = '6.0'
+version = '6.0-SNAPSHOT'
 
 description = 'Library of ScalaFX utilities'
 
@@ -58,7 +58,7 @@ dependencies {
     compile 'org.scala-lang:scala-library:2.11.8'
     compile 'org.scalafx:scalafx_2.11:8.0.92-R10'
 
-    compile 'info.gianlucacosta.helios:helios-core:5.1'
+    compile 'info.gianlucacosta.helios:helios-core:6.0-SNAPSHOT'
 }
 
 

@@ -18,7 +18,7 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.apps
+package info.gianlucacosta.helios.fx.application
 
 import java.io.InputStream
 import java.net.URL

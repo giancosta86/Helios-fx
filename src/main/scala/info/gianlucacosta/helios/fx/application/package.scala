@@ -18,24 +18,12 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.geometry.extensions
+package info.gianlucacosta.helios.fx
 
-import scalafx.geometry.Point2D
-import scalafx.scene.input.MouseEvent
+import javafx.stage.Stage
 
-/**
-  * MouseEvent extensions
-  *
-  * @param mouseEvent
-  */
-class MouseEventExtensions private[extensions](mouseEvent: MouseEvent) {
-  /**
-    * Returns the event's point
-    *
-    * @return The event's point, as a Point2D
-    */
-  def point: Point2D = new Point2D(
-    mouseEvent.x,
-    mouseEvent.y
-  )
+import info.gianlucacosta.helios.apps.AppInfo
+
+package object application {
+  private[application] type AppStartupCallback = (AppInfo, SplashStage, Stage) => Unit
 }

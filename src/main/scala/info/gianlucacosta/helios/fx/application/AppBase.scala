@@ -18,13 +18,15 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.apps
+package info.gianlucacosta.helios.fx.application
 
 import javafx.application.Application
 import javafx.stage.Stage
 
 import info.gianlucacosta.helios.apps.AppInfo
-import info.gianlucacosta.helios.fx.stages.StageUtils
+import scalafx.Includes._
+import info.gianlucacosta.helios.fx.Includes._
+
 
 /**
   * Abstract app automatically showing a splash screen (displaying the app's main icon) during its
@@ -81,6 +83,6 @@ abstract class AppBase(appInfo: AppInfo) extends Application {
     primaryStage.setHeight(600)
     primaryStage.centerOnScreen()
 
-    StageUtils.setMainIcon(primaryStage, appInfo)
+    primaryStage.setMainIcon(appInfo)
   }
 }

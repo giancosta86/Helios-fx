@@ -7,7 +7,7 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0"
             prefWidth="754.0" stylesheets="@AboutBox.css" xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="info.gianlucacosta.helios.fx.about.AboutBoxController">
+            fx:controller="info.gianlucacosta.helios.fx.dialogs.about.AboutBoxController">
     <center>
         <VBox fx:id="infoPane" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>

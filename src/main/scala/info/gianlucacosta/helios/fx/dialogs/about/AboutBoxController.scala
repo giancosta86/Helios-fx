@@ -18,7 +18,7 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.about
+package info.gianlucacosta.helios.fx.dialogs.about
 
 import javafx.fxml.FXML
 

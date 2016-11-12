@@ -18,39 +18,44 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.apps
+package info.gianlucacosta.helios.fx.dialogs.about
 
-import javafx.stage.Stage
+import javafx.fxml.FXMLLoader
 
 import info.gianlucacosta.helios.apps.AppInfo
-import info.gianlucacosta.helios.fx.dialogs.Alerts
 
 import scalafx.application.Platform
+import scalafx.scene.control.Alert.AlertType
+import scalafx.scene.control.{Alert, ButtonBar, ButtonType}
+
+/**
+  * Dialog showing the application's information.
+  *
+  * This class must be instantiated on the GUI thread.
+  *
+  * @param appInfo an AppInfo object - for example, an instance of AuroraAppInfo
+  */
+class AboutBox(appInfo: AppInfo) extends Alert(AlertType.None) {
+  private val loader: FXMLLoader =
+    new FXMLLoader(this.getClass.getResource("AboutBox.fxml"))
+
+  private val root: javafx.scene.layout.Pane =
+    loader.load[javafx.scene.layout.Pane]
+
+  private val controller: AboutBoxController =
+    loader.getController[AboutBoxController]
 
 
-private class StartupThread(
-                             appInfo: AppInfo,
-                             splashStage: SplashStage,
-                             primaryStage: Stage,
-                             startupCallback: AppStartupCallback
-                           ) extends Thread {
-  setDaemon(true)
+  Platform.runLater {
+    controller.setup(appInfo)
 
-  override def run(): Unit = {
-    try {
-      startupCallback(appInfo, splashStage, primaryStage)
+    dialogPane().setContent(root)
 
-      Platform.runLater {
-        primaryStage.show()
-        splashStage.close()
-      }
-    } catch {
-      case ex: Exception =>
-        Platform.runLater {
-          Alerts.showException(ex, "Startup error")
 
-          System.exit(1)
-        }
-    }
+    buttonTypes = Seq(
+      new ButtonType("OK", ButtonBar.ButtonData.OKDone)
+    )
+
+    title = s"About ${appInfo.name}..."
   }
 }

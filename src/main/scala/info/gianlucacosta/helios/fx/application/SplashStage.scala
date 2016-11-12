@@ -18,10 +18,10 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.apps
+package info.gianlucacosta.helios.fx.application
 
 import info.gianlucacosta.helios.apps.AppInfo
-import info.gianlucacosta.helios.fx.stages.StageUtils
+import info.gianlucacosta.helios.fx.Includes._
 
 import scalafx.Includes._
 import scalafx.application.Platform
@@ -40,7 +40,7 @@ import scalafx.stage.{Stage, StageStyle}
   *
   * @param appInfo The AppInfo object
   */
-class SplashStage private[apps](appInfo: AppInfo) extends Stage(StageStyle.Undecorated) {
+class SplashStage private[application](appInfo: AppInfo) extends Stage(StageStyle.Undecorated) {
   title = s"Loading ${appInfo.title}..."
 
   private val statusLabel = Label {
@@ -72,7 +72,7 @@ class SplashStage private[apps](appInfo: AppInfo) extends Stage(StageStyle.Undec
     }
   }
 
-  StageUtils.setMainIcon(this, appInfo)
+  this.setMainIcon(appInfo)
 
   sizeToScene()
 

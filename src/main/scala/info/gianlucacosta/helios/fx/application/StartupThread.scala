@@ -18,19 +18,39 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.geometry.extensions
+package info.gianlucacosta.helios.fx.application
 
-import scala.language.implicitConversions
-import scalafx.geometry.{Bounds, Point2D}
-import scalafx.scene.input.MouseEvent
+import javafx.stage.Stage
 
-object GeometryExtensions {
-  implicit def convertBounds(bounds: Bounds): BoundsExtensions =
-    new BoundsExtensions(bounds)
+import info.gianlucacosta.helios.apps.AppInfo
+import info.gianlucacosta.helios.fx.dialogs.Alerts
 
-  implicit def convertMouseEvent(mouseEvent: MouseEvent): MouseEventExtensions =
-    new MouseEventExtensions(mouseEvent)
+import scalafx.application.Platform
 
-  implicit def convertPoint2D(source: Point2D): Point2DExtensions =
-    new Point2DExtensions(source.x, source.y)
+
+private class StartupThread(
+                             appInfo: AppInfo,
+                             splashStage: SplashStage,
+                             primaryStage: Stage,
+                             startupCallback: AppStartupCallback
+                           ) extends Thread {
+  setDaemon(true)
+
+  override def run(): Unit = {
+    try {
+      startupCallback(appInfo, splashStage, primaryStage)
+
+      Platform.runLater {
+        primaryStage.show()
+        splashStage.close()
+      }
+    } catch {
+      case ex: Exception =>
+        Platform.runLater {
+          Alerts.showException(ex, "Startup error")
+
+          System.exit(1)
+        }
+    }
+  }
 }

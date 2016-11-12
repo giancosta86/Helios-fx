@@ -18,7 +18,7 @@
   ===========================================================================
 */
 
-package info.gianlucacosta.helios.fx.geometry.extensions
+package info.gianlucacosta.helios.fx.geometry
 
 import scala.language.implicitConversions
 import scalafx.geometry.{Dimension2D, Point2D}
@@ -26,10 +26,9 @@ import scalafx.geometry.{Dimension2D, Point2D}
 /**
   * Generic extensions for the Point2D class
   *
-  * @param x
-  * @param y
+  * @param point
   */
-class Point2DExtensions private[extensions](x: Double, y: Double) extends Point2D(x, y) {
+class Point2DExtensions private[fx](point: Point2D) extends Point2D(point.x, point.y) {
   def +(other: Point2D): Point2D = new Point2D(
     x + other.x,
     y + other.y
