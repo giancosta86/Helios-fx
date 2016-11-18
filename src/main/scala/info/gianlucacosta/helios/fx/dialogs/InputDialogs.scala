@@ -64,6 +64,8 @@ case object InputDialogs {
         )
       }
 
+    Alerts.fix(alert)
+
     val inputResult =
       alert.showAndWait()
 
