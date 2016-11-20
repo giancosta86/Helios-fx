@@ -11,13 +11,21 @@ It is based on [Helios-core](https://github.com/giancosta86/Helios-core) and pro
 
 * simplified app startup, showing a ready-made, icon-based splash stage - via **AppBase**, **AppMain** and **SplashStage**
 
+* easy and tidy FXML loading provided by **FxmlScene**, which also supports injecting variable into its controller
+
 * a gallery of output and input dialogs - via **Alerts** and **InputDialogs**, as well as dedicated dialogs - in particular, **BusyDialog**
 
 * **FileChooserExtensions**, to enhance the behaviour of FileChooser dialogs
 
 * a **Workspace** class, handling document lifecycle
 
-* extension methods, provided by **GeometryExtensions**
+* extension methods, provided by **Includes**. To use them, just import them à la ScalaFX:
+
+  ```scala
+  import info.gianlucacosta.helios.fx.Includes._
+  ```
+
+* **FxEngine**, to easily initialize the FX toolkit in contexts where an app might not be available - for example, *automated tests*
 
 * a ready-made **AboutBox**
 
