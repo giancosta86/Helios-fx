@@ -58,8 +58,10 @@ class FxmlScene[TController, TRootNode <: Parent](controllerClass: Class[TContro
   /**
     * The underlying controller instance
     */
-  protected val controller: TController =
-  controllerClass.newInstance()
+  protected val controller: TController = {
+    val noArgConstructor = controllerClass.getConstructor()
+    noArgConstructor.newInstance().asInstanceOf[TController]
+  }
 
 
   preInitialize()
