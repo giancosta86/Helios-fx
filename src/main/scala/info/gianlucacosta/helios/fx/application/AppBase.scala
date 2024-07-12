@@ -31,7 +31,7 @@ abstract class AppBase(appInfo: AppInfo) extends Application {
     initPrimaryStage(primaryStage)
 
     new StartupThread(appInfo, splashStage, primaryStage, startup) {
-      start()
+      this.start()
     }
   }
 
@@ -53,7 +53,7 @@ abstract class AppBase(appInfo: AppInfo) extends Application {
     * @param splashStage  The application's splash stage
     * @param primaryStage The application's provided stage
     */
-  protected def startup(appInfo: AppInfo, splashStage: SplashStage, primaryStage: Stage)
+  protected def startup(appInfo: AppInfo, splashStage: SplashStage, primaryStage: Stage): Unit
 
 
   private def initPrimaryStage(primaryStage: Stage): Unit = {

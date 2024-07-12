@@ -3,7 +3,7 @@ package info.gianlucacosta.helios.fx.stage
 import java.io.File
 import javafx.stage.Window
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.language.implicitConversions
 import scalafx.stage.FileChooser
 
@@ -71,6 +71,7 @@ class FileChooserExtensions private[fx](fileChooser: FileChooser) {
 
       val filterMainExtension =
         selectedFilter.getExtensions
+          .asScala
           .head
           .split('.')
           .last

@@ -1,23 +1,23 @@
 buildscript {
     repositories {
         maven {
-            url 'https://dl.bintray.com/giancosta86/Hephaestus'
+            url 'http://localhost:8080/snapshots'
         }
 
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'info.gianlucacosta.moonlicense:moonlicense-gradle:5.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'info.gianlucacosta.aurora:aurora:8.0'
+        classpath 'info.gianlucacosta.aurora:aurora:10.0.0-SNAPSHOT'
     }
 }
 
-apply plugin: 'scala'
-apply plugin: 'maven'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'info.gianlucacosta.moonlicense'
+plugins {
+    id 'scala'
+    id 'maven'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+
 apply plugin: 'info.gianlucacosta.aurora'
 
 group = 'info.gianlucacosta.helios'
@@ -27,12 +27,12 @@ version = '7.0.0-SNAPSHOT'
 description = 'Library of ScalaFX utilities'
 
 dependencies {
-    generatedCompile 'org.scala-lang:scala-library:2.11.8'
+    generatedCompile 'org.scala-lang:scala-library:2.13.14'
 
-    compile 'org.scala-lang:scala-library:2.11.8'
-    compile 'org.scalafx:scalafx_2.11:8.0.92-R10'
+    compile 'org.scala-lang:scala-library:2.13.14'
+    compile 'org.scalafx:scalafx_2.13:12.0.2-R18'
 
-    compile 'info.gianlucacosta.helios:helios-core:6.1'
+    compile 'info.gianlucacosta.helios:helios-core:7.0.0-SNAPSHOT'
 }
 
 aurora {
@@ -44,24 +44,7 @@ aurora {
         url = 'http://gianlucacosta.info/'
     }
 
-    bintray {
-        repo = 'Hephaestus'
-        licenses = ['Apache-2.0']
-        labels = [
-                'utilities',
-                'library',
-                'Scala',
-                'ScalaFX'
-        ]
-    }
-}
-
-moonLicense {
-    license = apache2
-
-    productInfo {
-        productName = 'Helios - FX'
-        inceptionYear = 2013
-        copyrightHolder = 'Gianluca Costa'
+    mavenDeploy {
+        url = 'http://localhost:8080/snapshots'
     }
 }

@@ -13,7 +13,7 @@ import scalafx.Includes._
 class AboutBoxController {
   private var appInfo: AppInfo = _
 
-  def setup(appInfo: AppInfo) {
+  def setup(appInfo: AppInfo): Unit = {
     this.appInfo =
       appInfo
 
@@ -40,7 +40,7 @@ class AboutBoxController {
   }
 
 
-  def showWebsite() {
+  def showWebsite(): Unit = {
     DesktopUtils.openBrowser(appInfo.website)
   }
 

@@ -231,7 +231,7 @@ abstract class Workspace(stage: Stage, documentFileChooser: FileChooser) {
     * Closes the stage, as if the used clicked on its close button.
     *
     */
-  def closeStage() {
+  def closeStage(): Unit = {
     val closeEvent = new WindowEvent(
       stage,
       WindowEvent.WINDOW_CLOSE_REQUEST

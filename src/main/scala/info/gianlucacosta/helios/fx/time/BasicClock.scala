@@ -79,7 +79,7 @@ class BasicClock(interval: Duration) {
         true
 
       new TickThread {
-        start()
+        this.start()
       }
     }
   }

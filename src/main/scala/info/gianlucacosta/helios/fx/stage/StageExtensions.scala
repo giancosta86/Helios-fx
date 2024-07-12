@@ -2,7 +2,7 @@ package info.gianlucacosta.helios.fx.stage
 
 import info.gianlucacosta.helios.apps.AppInfo
 
-import scala.collection.JavaConversions._
+import scala.jdk.CollectionConverters._
 import scala.language.implicitConversions
 import scalafx.stage.Stage
 
@@ -22,6 +22,6 @@ class StageExtensions private[fx](stage: Stage) {
       appInfo.getMainIconImage(size)
     )
 
-    stage.getIcons.setAll(iconImages)
+    stage.getIcons.setAll(iconImages.asJava)
   }
 }

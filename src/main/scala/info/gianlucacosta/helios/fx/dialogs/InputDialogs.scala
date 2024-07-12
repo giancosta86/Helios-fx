@@ -268,7 +268,13 @@ case object InputDialogs {
                 ): Option[Long] = {
     while (true) {
       val inputDoubleResult =
-        askForDouble(message, initialValue, minValue, maxValue, header)
+        askForDouble(
+          message, 
+          initialValue.toDouble, 
+          minValue.toDouble, 
+          maxValue.toDouble, 
+          header
+        )
 
       if (inputDoubleResult.isEmpty) {
         return None

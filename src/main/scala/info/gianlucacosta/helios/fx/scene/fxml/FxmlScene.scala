@@ -70,7 +70,7 @@ class FxmlScene[TController, TRootNode <: Parent](controllerClass: Class[TContro
     *
     * It is especially useful to inject parameters into the controller. By default, the method does nothing.
     */
-  protected def preInitialize() {}
+  protected def preInitialize(): Unit = {}
 
 
   root =
